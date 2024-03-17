@@ -1,6 +1,6 @@
 # Mina zkApp: Mleague
 
-This template uses TypeScript.
+Football Manager of web3.
 
 ## How to build
 
