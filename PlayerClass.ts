@@ -182,14 +182,41 @@ class Player{
     return this.technical;
   } 
 }
-function invokeTraining(player: Player): void {
-  const currentGoalkeeping = player.goalkeeping_getter;
-  const newGoalkeeping = {
-      Focus: currentGoalkeeping.Focus * 2,
-      Reflex: currentGoalkeeping.Reflex * 2,
-      Handling: currentGoalkeeping.Handling * 2,
-      Kicking: currentGoalkeeping.Kicking * 2,
-      one_on_one: currentGoalkeeping.one_on_one * 2
-  };
-  player.goalkeeping_setter = newGoalkeeping;
+
+function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
+   const u = 1 - Math.random();
+   const v = Math.random();
+   const z = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+   //z distribution
+   if (roundhalf == false){
+    return z * stdev + mean
+   }
+   else {
+    //0.5, 0.0 rounder
+    return(Math.round((z * stdev + mean) * 2)/2)
+   }
+   
+}
+
+function randomBoolean(){
+  return(Math.random()<0.5)
+}
+
+
+function invokeTraining(player: Player) {
+  const newGoalkeeping = {}
+  for (const key in player.goalkeeping_getter) {
+      newGoalkeeping[key] = gaussianRandom(3,1.5,true) + player.goalkeeping_getter[key]
+  }
+  let newGoalkeeping1 = newGoalkeeping as goalkeeping
+return(player.goalkeeping_setter = newGoalkeeping1);
+}
+
+//to be corrected
+function generatePlayer () {
+  const newGoalkeeping = {}
+  for (const key in player.goalkeeping_getter) {
+      newGoalkeeping[key] = gaussianRandom(80,10,true)
+  }
+  let newGoalkeeping1 = newGoalkeeping as goalkeeping
 }
