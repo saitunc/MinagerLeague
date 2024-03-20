@@ -57,43 +57,43 @@ class Player{
   private physical: physical
   private mental: mental
   constructor(
-    Focus: number,
-    Reflex: number,
-    Handling: number,
-    Kicking: number,
-    one_on_one: number,
-    Name: string,
-    Age: number,
-    Position: string,
-    Goals: number,
-    Passes: number,
-    Assists: number,
-    Matches_played: number,
-    isInjured: boolean,
-    Yellow_Card: number,
-    Red_Card: boolean,
-    isTraining: boolean,
-    Motivation: number,
-    Fitness: number,
-    Stamina: number,
-    Corner: number,
-    Dribbling: number,
-    Passing: number,
-    Finishing: number,
-    Ball_control: number,
-    Free_kick: number,
-    Tackling: number,
-    Speed: number,
-    Agility: number,
-    Endurance: number,
-    Strength: number,
-    Aggression: number,
-    Bravery: number,
-    Intelligence: number,
-    Leadership: number
+    Focus: number = 1,
+    Reflex: number = 1,
+    Handling: number = 1,
+    Kicking: number = 1,
+    one_on_one: number = 1,
+    Name: string = "Joe",
+    Age: number = 1,
+    Position: string = "defense",
+    Goals: number = 0,
+    Passes: number = 0,
+    Assists: number = 0,
+    Matches_played: number = 0,
+    isInjured: boolean = false,
+    Yellow_Card: number = 0,
+    Red_Card: boolean = false,
+    isTraining: boolean = false,
+    Motivation: number = 1, 
+    Fitness: number = 1,
+    Stamina: number = 1,
+    Corner: number = 1,
+    Dribbling: number = 1,
+    Passing: number = 1,
+    Finishing: number = 1,
+    Ball_control: number = 1,
+    Free_kick: number = 1,
+    Tackling: number = 1, 
+    Speed: number = 1,
+    Agility: number = 1,
+    Endurance: number = 1,
+    Strength: number = 1,
+    Aggression: number = 1,
+    Bravery: number = 1,
+    Intelligence: number = 1,
+    Leadership: number = 1
     ) {
    this.goalkeeping= {
-    Focus,
+    Focus: Focus,
     Reflex: Reflex,
     Handling: Handling,
     Kicking: Kicking,
@@ -198,11 +198,6 @@ function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
    
 }
 
-function randomBoolean(){
-  return(Math.random()<0.5)
-}
-
-
 function invokeTraining(player: Player) {
   const newGoalkeeping = {}
   for (const key in player.goalkeeping_getter) {
@@ -212,11 +207,15 @@ function invokeTraining(player: Player) {
 return(player.goalkeeping_setter = newGoalkeeping1);
 }
 
-//to be corrected
+
 function generatePlayer () {
-  const newGoalkeeping = {}
-  for (const key in player.goalkeeping_getter) {
-      newGoalkeeping[key] = gaussianRandom(80,10,true)
+  let newPlayer = new Player()
+  const new_goalkeeping = {}  
+  for (const key in newPlayer.goalkeeping_getter) {
+      new_goalkeeping[key] = Math.min(gaussianRandom(80,10,true), 100)
   }
-  let newGoalkeeping1 = newGoalkeeping as goalkeeping
+  let newGoalkeeping1 = new_goalkeeping as goalkeeping
+    newPlayer.goalkeeping_setter = newGoalkeeping1
+    return(newPlayer)
 }
+
