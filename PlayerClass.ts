@@ -181,6 +181,31 @@ class Player{
   get technical_getter(): technical {
     return this.technical;
   } 
+    
+  //mental setter- getter
+  set mental_setter(new_mental: mental) {
+        this.mental = new_mental;
+  }
+  get mental_getter(): mental {
+    return this.mental;
+  } 
+
+  //physical setter- getter
+  set physical_setter(new_physical: physical) {
+        this.physical = new_physical;
+  }
+  get physical_getter(): physical {
+    return this.physical;
+  }
+  setCombined(newData: { mental?: mental, physical?: physical, technical?: technical, goalkeeping?:goalkeeping }) {
+     if (newData.mental) {
+         this.mental = newData.mental;
+     }
+     if (newData.physical) {
+         this.physical = newData.physical;
+     }
+  }
+    
 }
 
 function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
@@ -196,26 +221,42 @@ function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
     return(Math.round((z * stdev + mean) * 2)/2)
    }
    
-}
+ }
 
 function invokeTraining(player: Player) {
-  const newGoalkeeping = {}
-  for (const key in player.goalkeeping_getter) {
-      newGoalkeeping[key] = gaussianRandom(3,1.5,true) + player.goalkeeping_getter[key]
+  const newGoalkeeping = {
+    mental: player.mental_getter,
+    physical: player.physical_getter,
+    technical: player.technical_getter,
+    goalkeeping: player.goalkeeping_getter
   }
-  let newGoalkeeping1 = newGoalkeeping as goalkeeping
-return(player.goalkeeping_setter = newGoalkeeping1);
+  for (const key in newGoalkeeping) {
+      for (const key1 in newGoalkeeping[key]) {
+        newGoalkeeping[key][key1] = gaussianRandom(3,1.5,true) + newGoalkeeping[key][key1]
+      }
+  }
+    player.setCombined (newGoalkeeping)
+  return(player);
 }
 
+function randomBoolean(){
+  return(Math.random()<0.5)
+}
 
+//an age variable will be added to generate player to simulate age - performance relation
 function generatePlayer () {
   let newPlayer = new Player()
-  const new_goalkeeping = {}  
-  for (const key in newPlayer.goalkeeping_getter) {
-      new_goalkeeping[key] = Math.min(gaussianRandom(80,10,true), 100)
+  const new_goalkeeping  = {
+     mental: newPlayer.mental_getter,
+     physical: newPlayer.physical_getter,
+     technical: newPlayer.technical_getter,
+     goalkeeping: newPlayer.goalkeeping_getter
+  } 
+  for (const key in new_goalkeeping) {
+     for(const key1 in new_goalkeeping[key]){
+        new_goalkeeping[key][key1] = Math.min(gaussianRandom(80,10,true), 100)
+     }
   }
-  let newGoalkeeping1 = new_goalkeeping as goalkeeping
-    newPlayer.goalkeeping_setter = newGoalkeeping1
+    newPlayer.setCombined (new_goalkeeping)
     return(newPlayer)
 }
-
