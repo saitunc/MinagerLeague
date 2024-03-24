@@ -1,4 +1,10 @@
+
+const footballPlayerNames: string[] = [
+    "Alexi Ballack", "Ronaldo Martinez", "Luka Kim", "Andre Silva", "Gabriel Torres", "Nikola Vidal", "Diego Costa", "Ivan Mendez", "Sergio Perez", "Marco Sanchez", "Lucas Rodriguez", "Pedro Lee", "Matias Santos", "Andres Lopez", "David Smith", "Juan Martin", "Carlos Lee", "Diego Ramirez", "Luis Rodriguez", "Ricardo Hernandez", "Miguel Silva", "Sebastian Hernandez", "Martin Alvarez", "Javier Lee", "Fernando Chavez", "Oscar Gonzalez", "Jorge Garcia", "Daniel Ramirez", "Rafael Vazquez", "Christian Mendez", "Jose Rodriguez", "Eduardo Perez", "Nicolas Rodriguez", "Francisco Ramirez", "Joaquin Lee", "Ignacio Gonzalez", "Julian Mendez", "Victor Hernandez", "Marcelo Santos", "Mauricio Rodriguez", "Antonio Perez", "Jose Sanchez", "Rodrigo Mendez", "Alonso Lopez", "Alvaro Perez", "Leonardo Santos", "Pablo Garcia", "Adrian Ramirez", "Maximiliano Martinez", "Manuel Rodriguez", "Roberto Mendez", "Cristian Ramirez", "Hector Lee", "Mariano Perez", "Santiago Lopez", "Esteban Sanchez", "Fabian Garcia", "Federico Mendez", "Raul Ramirez", "Angel Rodriguez", "Gonzalo Mendez", "Jonathan Perez", "Pedro Lee", "Matias Santos", "Andres Lopez", "David Smith", "Juan Martin", "Carlos Lee", "Diego Ramirez", "Luis Rodriguez", "Ricardo Hernandez", "Miguel Silva", "Sebastian Hernandez", "Martin Alvarez", "Javier Lee", "Fernando Chavez", "Oscar Gonzalez", "Jorge Garcia", "Daniel Ramirez", "Rafael Vazquez", "Christian Mendez", "Jose Rodriguez", "Eduardo Perez", "Nicolas Rodriguez", "Francisco Ramirez", "Joaquin Lee", "Ignacio Gonzalez", "Julian Mendez", "Victor Hernandez", "Marcelo Santos", "Mauricio Rodriguez", "Antonio Perez", "Jose Sanchez", "Rodrigo Mendez", "Alonso Lopez", "Alvaro Perez", "Leonardo Santos", "Pablo Garcia", "Adrian Ramirez", "Maximiliano Martinez", "Manuel Rodriguez", "Roberto Mendez", "Cristian Ramirez", "Hector Lee", "Mariano Perez", "Santiago Lopez", "Esteban Sanchez", "Fabian Garcia", "Federico Mendez", "Raul Ramirez", "Angel Rodriguez", "Gonzalo Mendez", "Jonathan Perez"
+];
+
 //grouped properties by using interface
+
 interface goalkeeping {
   Focus: number;
   Reflex: number;
@@ -100,9 +106,9 @@ class Player{
     one_on_one: one_on_one
    }
    this.personal = {
-    Name,
-    Age,
-    Position
+    Name: Name,
+    Age: Age,
+    Position: Position
    }
    this.history = {
     Goals: Goals,
@@ -197,14 +203,20 @@ class Player{
   get physical_getter(): physical {
     return this.physical;
   }
-  setCombined(newData: { mental?: mental, physical?: physical, technical?: technical, goalkeeping?:goalkeeping }) {
-     if (newData.mental) {
-         this.mental = newData.mental;
-     }
-     if (newData.physical) {
-         this.physical = newData.physical;
-     }
-  }
+    setCombined(newData: { mental?: mental, physical?: physical, technical?: technical, goalkeeping?:goalkeeping }) {
+        if (newData.mental) {
+            this.mental = newData.mental;
+        }
+        if (newData.physical) {
+            this.physical = newData.physical;
+        }
+        if (newData.technical) {
+            this.technical = newData.technical;
+        }
+        if (newData.goalkeeping) {
+            this.goalkeeping = newData.goalkeeping;
+        }
+    }
     
 }
 
@@ -221,7 +233,7 @@ function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
     return(Math.round((z * stdev + mean) * 2)/2)
    }
    
- }
+}
 
 function invokeTraining(player: Player) {
   const newGoalkeeping = {
@@ -230,33 +242,70 @@ function invokeTraining(player: Player) {
     technical: player.technical_getter,
     goalkeeping: player.goalkeeping_getter
   }
+    
   for (const key in newGoalkeeping) {
       for (const key1 in newGoalkeeping[key]) {
         newGoalkeeping[key][key1] = gaussianRandom(3,1.5,true) + newGoalkeeping[key][key1]
-      }
-  }
+  }}
     player.setCombined (newGoalkeeping)
-  return(player);
+return(player);
 }
 
-function randomBoolean(){
-  return(Math.random()<0.5)
-}
 
-//an age variable will be added to generate player to simulate age - performance relation
-function generatePlayer () {
+function generatePlayer (place: string) {
   let newPlayer = new Player()
   const new_goalkeeping  = {
-     mental: newPlayer.mental_getter,
-     physical: newPlayer.physical_getter,
-     technical: newPlayer.technical_getter,
-     goalkeeping: newPlayer.goalkeeping_getter
+    mental: newPlayer.mental_getter,
+    physical: newPlayer.physical_getter,
+    technical: newPlayer.technical_getter,
+    goalkeeping: newPlayer.goalkeeping_getter
   } 
   for (const key in new_goalkeeping) {
-     for(const key1 in new_goalkeeping[key]){
-        new_goalkeeping[key][key1] = Math.min(gaussianRandom(80,10,true), 100)
-     }
+    for(const key1 in new_goalkeeping[key]){
+      new_goalkeeping[key][key1] = Math.min(gaussianRandom(80,10,true), 100)
+    }
   }
-    newPlayer.setCombined (new_goalkeeping)
-    return(newPlayer)
+  newPlayer.setCombined (new_goalkeeping)
+  newPlayer.personal_setter = {
+    Name: footballPlayerNames[Math.floor(Math.random() * footballPlayerNames.length)],
+    Age: Math.round(Math.max(gaussianRandom(27,5,false), 17)),
+    Position: place
+  }
+  return(newPlayer)
 }
+
+
+
+
+class Team {
+    teamName: string
+    money: number
+    players: Player[]
+
+    constructor(teamName: string,
+                money: number = 1000) {
+        this.teamName = teamName;
+        this.players = [];
+        this.money = money
+    }
+
+    addPlayer(player: Player) {
+        this.players.push(player); 
+    }
+
+    generateTeam() {
+        for (let i = 0; i < 2; i++) {
+            this.addPlayer(generatePlayer("goalkeeper"));
+        }
+        for (let i = 0; i < 6; i++) {
+            this.addPlayer(generatePlayer("defense"));
+        }
+        for (let i = 0; i < 5; i++) {
+            this.addPlayer(generatePlayer("midfielder"));
+        }
+        for (let i = 0; i < 4; i++) {
+            this.addPlayer(generatePlayer("attack"));
+        }
+    }
+}
+
