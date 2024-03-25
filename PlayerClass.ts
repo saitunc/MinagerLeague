@@ -245,32 +245,93 @@ function invokeTraining(player: Player) {
     
   for (const key in newGoalkeeping) {
       for (const key1 in newGoalkeeping[key]) {
-        newGoalkeeping[key][key1] = gaussianRandom(3,1.5,true) + newGoalkeeping[key][key1]
+        newGoalkeeping[key][key1] = Math.min((gaussianRandom(3,1.5,true) + newGoalkeeping[key][key1]),100)
   }}
     player.setCombined (newGoalkeeping)
 return(player);
 }
 
+//Cartesian positioning related stats weight will be added
 
+//Will change completely according to this final version
 function generatePlayer (place: string) {
   let newPlayer = new Player()
+    
+  newPlayer.personal_setter = {
+    Name: footballPlayerNames[Math.floor(Math.random() * footballPlayerNames.length)],
+    Age: Math.round(Math.max(gaussianRandom(27,5,false), 17)),
+    Position: place
+  }
+    
   const new_goalkeeping  = {
     mental: newPlayer.mental_getter,
     physical: newPlayer.physical_getter,
     technical: newPlayer.technical_getter,
     goalkeeping: newPlayer.goalkeeping_getter
   } 
+    
   for (const key in new_goalkeeping) {
     for(const key1 in new_goalkeeping[key]){
       new_goalkeeping[key][key1] = Math.min(gaussianRandom(80,10,true), 100)
     }
   }
-  newPlayer.setCombined (new_goalkeeping)
-  newPlayer.personal_setter = {
-    Name: footballPlayerNames[Math.floor(Math.random() * footballPlayerNames.length)],
-    Age: Math.round(Math.max(gaussianRandom(27,5,false), 17)),
-    Position: place
+  if (newPlayer.personal_getter.Position === "goalkeeper"){
+    for (const key in new_goalkeeping.technical) {
+      new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.65) * 2)/2;
   }
+  for (const key in new_goalkeeping.physical) {
+      new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.65) * 2)/2;
+  }
+  for (const key in new_goalkeeping.mental) {
+      new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.80) * 2)/2;
+  }
+  }
+    
+  else if (newPlayer.personal_getter.Position === "defense"){
+    for (const key in new_goalkeeping.goalkeeping) {
+      new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.60) * 2)/2;
+  }
+    for (const key in new_goalkeeping.technical) {
+      new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.85) * 2)/2;
+  }
+  for (const key in new_goalkeeping.physical) {
+      new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.85) * 2)/2;
+  }
+  for (const key in new_goalkeeping.mental) {
+      new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.90) * 2)/2;
+  }
+  }
+    else if (newPlayer.personal_getter.Position === "midfielder"){
+    for (const key in new_goalkeeping.goalkeeping) {
+      new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.45) * 2)/2;
+  }
+    for (const key in new_goalkeeping.technical) {
+      new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.75) * 2)/2;
+  }
+  for (const key in new_goalkeeping.physical) {
+      new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.80) * 2)/2;
+  }
+  for (const key in new_goalkeeping.mental) {
+      new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.90) * 2)/2;
+  }
+    }
+
+    else if(newPlayer.personal_getter.Position === "attack"){
+        for (const key in new_goalkeeping.goalkeeping) {
+      new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.30) * 2)/2;
+  }
+    for (const key in new_goalkeeping.technical) {
+      new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.55) * 2)/2;
+  }
+  for (const key in new_goalkeeping.physical) {
+      new_goalkeeping.physical[key] = new_goalkeeping.physical[key];
+  }
+  for (const key in new_goalkeeping.mental) {
+      new_goalkeeping.mental[key] = new_goalkeeping.mental[key];
+  }
+    }
+  newPlayer.setCombined (new_goalkeeping)
+
   return(newPlayer)
 }
 
@@ -290,7 +351,7 @@ class Team {
     }
 
     addPlayer(player: Player) {
-        this.players.push(player); 
+        this.players.push(player); // Add player to the team
     }
 
     generateTeam() {
@@ -308,4 +369,3 @@ class Team {
         }
     }
 }
-
