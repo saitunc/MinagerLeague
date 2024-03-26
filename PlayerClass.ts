@@ -235,6 +235,7 @@ function gaussianRandom(mean: number, stdev: number, roundhalf: boolean) {
    
 }
 
+//age and increasing returns
 function invokeTraining(player: Player) {
   const newGoalkeeping = {
     mental: player.mental_getter,
@@ -272,31 +273,41 @@ function generatePlayer (place: string) {
     
   for (const key in new_goalkeeping) {
     for(const key1 in new_goalkeeping[key]){
-      new_goalkeeping[key][key1] = Math.min(gaussianRandom(80,10,true), 100)
+      new_goalkeeping[key][key1] = Math.min(gaussianRandom(70,7,true), 100)
     }
   }
   if (newPlayer.personal_getter.Position === "goalkeeper"){
     for (const key in new_goalkeeping.technical) {
+      if((key != "Passing")){
       new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.65) * 2)/2;
-  }
+      }
+    else {
+      new_goalkeeping.technical[key] = Math.min(gaussianRandom(70,7,true), 100);
+      }
+    }
   for (const key in new_goalkeeping.physical) {
+      if((key != "Strength") && (key != "Agility")){
       new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.65) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.mental) {
+       if((key != "Intelligence") && (key != "Leadership")){
       new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.80) * 2)/2;
   }
-  }
+  }}
     
   else if (newPlayer.personal_getter.Position === "defense"){
     for (const key in new_goalkeeping.goalkeeping) {
+      if((key != "Focus") && (key != "Kicking")){
       new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.60) * 2)/2;
-  }
+  }}
     for (const key in new_goalkeeping.technical) {
+      if((key != "Passing") && (key != "Tackling")){
       new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.85) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.physical) {
+      if((key != "Strength")){
       new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.85) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.mental) {
       new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.90) * 2)/2;
   }
@@ -306,26 +317,31 @@ function generatePlayer (place: string) {
       new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.45) * 2)/2;
   }
     for (const key in new_goalkeeping.technical) {
+          if((key != "Finishing") && (key != "Ball_control")&& (key != "Passing") && (key != "Free_kick")){
       new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.75) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.physical) {
+      if((key != "Speed") && (key != "Endurance")&& (key != "Agility")){
       new_goalkeeping.physical[key] = Math.round((new_goalkeeping.physical[key] * 0.80) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.mental) {
+      if( (key != "Intelligence")&& (key != "Leadership")){
       new_goalkeeping.mental[key] = Math.round((new_goalkeeping.mental[key] * 0.90) * 2)/2;
   }
-    }
+    }}
 
     else if(newPlayer.personal_getter.Position === "attack"){
         for (const key in new_goalkeeping.goalkeeping) {
       new_goalkeeping.goalkeeping[key] = Math.round((new_goalkeeping.goalkeeping[key] * 0.30) * 2)/2;
   }
     for (const key in new_goalkeeping.technical) {
+      if( (key != "Dribbling")&& (key != "Finishing") && (key != "Ball_control")&& (key != "Free_kick")){
       new_goalkeeping.technical[key] = Math.round((new_goalkeeping.technical[key] * 0.55) * 2)/2;
-  }
+  }}
   for (const key in new_goalkeeping.physical) {
+      if( (key != "Speed")&& (key != "Strength")){
       new_goalkeeping.physical[key] = new_goalkeeping.physical[key];
-  }
+  }}
   for (const key in new_goalkeeping.mental) {
       new_goalkeeping.mental[key] = new_goalkeeping.mental[key];
   }
@@ -369,3 +385,7 @@ class Team {
         }
     }
 }
+
+let takim = new Team("team1")
+takim.generateTeam()
+console.log(takim.players[9])
