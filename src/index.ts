@@ -1,3 +1,5 @@
-import { Add } from './Add.js';
+import { Team } from "./models/Team"
 
-export { Add };
+let takim = new Team("team1")
+takim.generateTeam()
+console.log(takim.players[1].personal_getter)
