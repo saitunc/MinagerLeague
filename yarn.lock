@@ -1960,6 +1960,13 @@ delayed-stream@~1.0.0:
   resolved "https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
 
+detect-gpu@^5.0.5:
+  version "5.0.38"
+  resolved "https://registry.npmjs.org/detect-gpu/-/detect-gpu-5.0.38.tgz"
+  integrity sha512-36QeGHSXYcJ/RfrnPEScR8GDprbXFG4ZhXsfVNVHztZr38+fRxgHnJl3CjYXXjbeRUhu3ZZBJh6Lg0A9v0Qd8A==
+  dependencies:
+    webgl-constants "^1.1.1"
+
 detect-newline@^3.0.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/detect-newline/-/detect-newline-3.1.0.tgz"
@@ -3229,10 +3236,10 @@ mimic-fn@^2.1.0:
   resolved "https://registry.npmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
 
-mina-signer@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.npmjs.org/mina-signer/-/mina-signer-3.0.5.tgz"
-  integrity sha512-H/Dqp8UZom0U9CXqB68hmH2GZDz1PyGL9eWV8FkJ8zxLNwdmtk9/TJ2RKR/R7OfmfvY5W+F7wKJ8WgzeFjt+Eg==
+mina-signer@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npmjs.org/mina-signer/-/mina-signer-2.1.2.tgz"
+  integrity sha512-fvi1L8vjEFHyZp66eUsCXp80A5WXEHKvGunwLikDWMilVC7bS36AvVZOc1s+8F48xNsKXuxcwkMrPWPzNgechA==
   dependencies:
     blakejs "^1.2.1"
     js-sha256 "^0.9.0"
@@ -3293,13 +3300,14 @@ nwsapi@^2.2.0:
   resolved "https://registry.npmjs.org/nwsapi/-/nwsapi-2.2.7.tgz"
   integrity sha512-ub5E4+FBPKwAZx0UwIQOjYWGHTEq5sPqHQNRN8Z9e4A7u3Tj1weLJsL59yH9vmvqEtBHaOmT6cYQKIZOxp35FQ==
 
-o1js@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.npmjs.org/o1js/-/o1js-0.17.0.tgz"
-  integrity sha512-OPQc3jBG2X5z7yI2mcovzRVbd91Q2D/npep14+g0wBdGXpyyAFdaz59YjVlEsPcY1Gmh2L+LCFhVA2fQ+1ogIg==
+o1js@0.16.*:
+  version "0.16.2"
+  resolved "https://registry.npmjs.org/o1js/-/o1js-0.16.2.tgz"
+  integrity sha512-CyQFURc2UzzNpPJcYUdvFqa6I7SjXksDCubgJixWjEoS3R+FOl/yttMwOwopxb3oLLK92MyD2ZM/OEdKqVUyyg==
   dependencies:
     blakejs "1.2.1"
     cachedir "^2.4.0"
+    detect-gpu "^5.0.5"
     isomorphic-fetch "^3.0.0"
     js-sha256 "^0.9.0"
     reflect-metadata "^0.1.13"
@@ -3906,10 +3914,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^5.4.3, "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=3.8 <5.0":
-  version "5.4.3"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-5.4.3.tgz"
-  integrity sha512-KrPd3PKaCLr78MalgiwJnA25Nm8HAmdwN3mYUYZgG/wizIo9EainNVQI9/yDavtVFRN2h3k8uf3GLHuhDMgEHg==
+typescript@^4.7.2, "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=3.8 <5.0":
+  version "4.9.5"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
+  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 undici-types@~5.26.4:
   version "5.26.5"
@@ -3996,6 +4004,11 @@ walker@^1.0.7:
   integrity sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==
   dependencies:
     makeerror "1.0.12"
+
+webgl-constants@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/webgl-constants/-/webgl-constants-1.1.1.tgz"
+  integrity sha512-LkBXKjU5r9vAW7Gcu3T5u+5cvSvh5WwINdr0C+9jpzVB41cjQAP5ePArDtk/WHYdVj0GefCgM73BA7FlIiNtdg==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

@@ -1,5 +1,5 @@
 /** @type {import('@ts-jest/dist/types').InitialOptionsTsJest} */
-export default {
+const config = {
   verbose: true,
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
@@ -22,3 +22,5 @@ export default {
     '^(\\.{1,2}/.+)\\.js$': '$1',
   },
 };
+
+export default config;
