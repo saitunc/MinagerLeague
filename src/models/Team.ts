@@ -1,15 +1,16 @@
 import { Player } from "./Player"
 import { afterPositioning } from "./interfaces"
 import { generatePlayer } from "../utils/generators"
+import { UInt64 } from "o1js"
 
 export class Team {
     teamName: string
-    money: number
+    money: UInt64
     players: Player[]
     positionPairs: afterPositioning[]
   
     constructor(teamName: string,
-                money: number = 1000) {
+                money: UInt64 = UInt64.from(1000)) {
         this.teamName = teamName;
         this.players = [];
         this.money = money;
@@ -83,5 +84,9 @@ export class Team {
       }
       else console.log("Error")
     }
+
+    teamPlayersInfo() {
+      return this.players.length
+    } 
   }
   

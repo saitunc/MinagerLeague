@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Player = void 0;
 var Player = /** @class */ (function () {
     function Player(Focus, Reflex, Handling, Kicking, one_on_one, Name, Age, Position, Side, Goals, Passes, Assists, Matches_played, isInjured, Yellow_Card, Red_Card, isTraining, Motivation, Fitness, Stamina, Corner, Dribbling, Passing, Finishing, Ball_control, Free_kick, Tackling, Speed, Agility, Endurance, Strength, Aggression, Bravery, Intelligence, Leadership) {

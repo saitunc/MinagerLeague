@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.gaussianRandom = void 0;
 function gaussianRandom(mean, stdev, roundhalf) {
     var u = 1 - Math.random();

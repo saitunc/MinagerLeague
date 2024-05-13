@@ -1,10 +1,11 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.Team = void 0;
 var generators_1 = require("../utils/generators");
+var o1js_1 = require("o1js");
 var Team = /** @class */ (function () {
     function Team(teamName, money) {
-        if (money === void 0) { money = 1000; }
+        if (money === void 0) { money = o1js_1.UInt64.from(1000); }
         this.teamName = teamName;
         this.players = [];
         this.money = money;
@@ -67,6 +68,9 @@ var Team = /** @class */ (function () {
         }
         else
             console.log("Error");
+    };
+    Team.prototype.teamPlayersInfo = function () {
+        return this.players.length;
     };
     return Team;
 }());

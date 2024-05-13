@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 exports.generatePlayer = void 0;
 var utils_1 = require("./stats/utils");
 var Player_1 = require("../models/Player");
