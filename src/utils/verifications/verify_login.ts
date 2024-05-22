@@ -1,6 +1,0 @@
-const checkAuro = async () =>{
-
-
-
-
-}

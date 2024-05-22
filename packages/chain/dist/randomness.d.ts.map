@@ -1,0 +1,1 @@
+{"version":3,"file":"Randomness.d.ts","sourceRoot":"","sources":["../src/Randomness.ts"],"names":[],"mappings":"AAAA,OAAO,EAA+B,aAAa,EAAS,MAAM,mBAAmB,CAAC;AACtF,OAAO,EAAE,QAAQ,EAAE,MAAM,qBAAqB,CAAC;AAC/C,OAAO,EAAE,KAAK,EAAE,SAAS,EAAE,MAAM,MAAM,CAAC;AAGxC,qBACa,MAAO,SAAQ,aAAa,CAAC,EAAE,CAAC;IACzB,SAAS,gEAAmD;IAK5E,eAAe,CAAC,SAAS,EAAG,KAAK;CAKpC"}

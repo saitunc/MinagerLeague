@@ -1,0 +1,23 @@
+
+> chain@1.0.0 test /Users/saitunc/Desktop/MinagerLeague/League/packages/chain
+> node --experimental-vm-modules --experimental-wasm-modules --experimental-wasm-threads ./node_modules/jest/bin/jest.js
+
+(node:27093) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS test/balances.test.ts (5.424 s)
+(node:27092) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS test/initGameState.test.ts (5.611 s)
+  ● Console
+
+    console.log
+      Initizalized league size can not be changed. You can update by registering
+
+      at Object.<anonymous> (test/initGameState.test.ts:54:13)
+
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        5.815 s
+Ran all test suites.
